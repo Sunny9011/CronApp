@@ -4,7 +4,7 @@ abstract class Parser
 {
     public $data = [];
 
-    public function parserPage(string $link): array
+    public function parserPage(): array
     {
         return $this->data;
     }
