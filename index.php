@@ -1,12 +1,13 @@
 <?php
-include_once 'Parser.php';
-include_once 'NewRecord.php';
+include_once 'Ubuntu.php';
+include_once 'XmlFeedModel.php';
 include_once 'DataBase.php';
 
-$objectParser = new Parser();
-$new = new NewRecord();
+$objectUbuntu = new Ubuntu();
+$new = new XmlFeedModel();
 $objectDataBase = new DataBase();
 
 $link = 'https://threatpost.com/category/web-security/feed/';
-$dataAfterParser = $objectParser->parserPage($link);
+$arrayTag = ['link', 'description', 'title', 'pubDate'];
+$dataAfterParser = $objectUbuntu->getParserUbuntu($link, $arrayTag);
 $new->addNewRecordInDB($dataAfterParser, $objectDataBase);

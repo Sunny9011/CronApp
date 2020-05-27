@@ -6,7 +6,7 @@ class DataBase
     private static $_instance;
     private $conn;
     private $dbpass = '';
-    private $dbhost = 'mysql:host=localhost;dbname=ubuntu';
+    private $dbhost = 'mysql:host=localhost;dbname=xmlfeed';
     private $dbuser = 'root';
 
     /**

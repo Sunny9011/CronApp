@@ -1,11 +1,11 @@
 <?php
 
-class NewRecord
+class XmlFeedModel
 {
-    public function addNewRecordInDB($parser, $dataBase)
+    public function addNewRecordInDB(array $parser, DataBase $dataBase): void
     {
         foreach ($parser as $item) {
-            $sql = "INSERT INTO ubuntu (link, title, description, pubDate)
+            $sql = "INSERT INTO xmlfeed (link, title, description, pubDate)
     VALUES ( '" . $item ['link'] . "', '" . $item ['title'] . "', '" . $item ['description'] . "', '" . $item ['pubDate'] . "')";
             $request = $dataBase->connect()->exec($sql);
         }
