@@ -1,11 +1,10 @@
 <?php
 include_once 'Ubuntu.php';
 include_once 'XmlFeedModel.php';
-include_once 'DataBase.php';
+
 
 $objectUbuntu = new Ubuntu();
-$new = new XmlFeedModel();
-$objectDataBase = new DataBase();
+$xmlModel = new XmlFeedModel();
 
-$dataAfterParser = $objectUbuntu->getParserUbuntu();
-$new->addNewRecordInDB($dataAfterParser, $objectDataBase);
+
+$dataAfterParser = $objectUbuntu->getParserUbuntu($xmlModel);

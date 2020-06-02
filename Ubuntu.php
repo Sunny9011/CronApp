@@ -4,21 +4,19 @@ include_once 'Parser.php';
 
 class Ubuntu extends Parser
 {
-    public $link = 'https://threatpost.com/category/web-security/feed/';
+    public $link = 'https://usn.ubuntu.com/usn/rss.xml';
     public $arrayTag = ['link', 'description', 'title', 'pubDate'];
 
-    public function getParserUbuntu(): array
+    public function getParserUbuntu(XmlFeedModel $objectXmlModel): XmlFeedModel
     {
-        $arrayTags = [];
         $xml = simplexml_load_file($this->link);
         foreach ($xml->xpath('//item') as $item) {
-            foreach ($this->arrayTag as $tag) {
-                $arrayTags ["$tag"] = $item->$tag->__toString();
-            }
-            $this->data[] = $arrayTags;
-            $arrayTags = [];
+                $objectXmlModel->setLink($item->link->__toString());
+                $objectXmlModel->setDescription($item->description->__toString()) ;
+                $objectXmlModel->setPubDate($item->pubDate->__toString());
+                $objectXmlModel->setTitle($item->title->__toString());
+                $objectXmlModel->saveData();
         }
-        return $this->data;
+        return $objectXmlModel;
     }
-
 }
