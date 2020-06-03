@@ -10,7 +10,7 @@ class XmlFeedModel
     protected $pubDate;
     protected $query;
 
-    public function saveData(DataBase $connect): void
+    public function writingParsingPageToDatabase(DataBase $connect): void
     {
             $this->query = "INSERT INTO xmlfeed (link, title, description, pubDate)
     VALUES ( '" . $this->link . "', '" . $this->title . "', '" . $this->description . "', '" . $this->pubDate . "')";

@@ -15,7 +15,7 @@ class ThreatPost extends Parser
             $objectXmlFeedModel->setDescription($item->description->__toString()) ;
             $objectXmlFeedModel->setPubDate($item->pubDate->__toString());
             $objectXmlFeedModel->setTitle($item->title->__toString());
-            $objectXmlFeedModel->saveData($connectToDB);
+            $objectXmlFeedModel->writingParsingPageToDatabase($connectToDB);
         }
     }
 }

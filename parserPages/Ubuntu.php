@@ -15,7 +15,7 @@ class Ubuntu extends Parser
                 $objectXmlModel->setDescription($item->description->__toString()) ;
                 $objectXmlModel->setPubDate($item->pubDate->__toString());
                 $objectXmlModel->setTitle($item->title->__toString());
-                $objectXmlModel->saveData($connectToDB);
+                $objectXmlModel->writingParsingPageToDatabase($connectToDB);
         }
     }
 }
