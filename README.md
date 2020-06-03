@@ -5,7 +5,6 @@ Rss feeds list has to be configurable, here is an example list:
 https://usn.ubuntu.com/usn/rss.xml
 https://threatpost.com/category/web-security/feed/
 Data that needs to be stored to database:
-  - source
   - link
   - title
   - description
