@@ -1,6 +1,5 @@
 <?php
 
-
 class DataBase
 {
     private static $_instance;

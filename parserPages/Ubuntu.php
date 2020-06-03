@@ -5,9 +5,9 @@ include_once 'Parser.php';
 class Ubuntu extends Parser
 {
     public $link = 'https://usn.ubuntu.com/usn/rss.xml';
-    public $arrayTag = ['link', 'description', 'title', 'pubDate'];
+    public $tags = ['link', 'description', 'title', 'pubDate'];
 
-    public function getParserUbuntu(XmlFeedModel $objectXmlModel): XmlFeedModel
+    public function pageParsing(XmlFeedModel $objectXmlModel, DataBase $connectToDB): void
     {
         $xml = simplexml_load_file($this->link);
         foreach ($xml->xpath('//item') as $item) {
@@ -15,8 +15,7 @@ class Ubuntu extends Parser
                 $objectXmlModel->setDescription($item->description->__toString()) ;
                 $objectXmlModel->setPubDate($item->pubDate->__toString());
                 $objectXmlModel->setTitle($item->title->__toString());
-                $objectXmlModel->saveData();
+                $objectXmlModel->saveData($connectToDB);
         }
-        return $objectXmlModel;
     }
 }

@@ -1,10 +1,15 @@
 <?php
-include_once 'Ubuntu.php';
-include_once 'XmlFeedModel.php';
+include_once './parserPages/Ubuntu.php';
+include_once './parserPages/ThreatPost.php';
+include_once './dataBase/XmlFeedModel.php';
+include_once './dataBase/DataBase.php';
 
 
 $objectUbuntu = new Ubuntu();
+$objectThreatPost = new ThreatPost();
 $xmlModel = new XmlFeedModel();
+$connectDB = new DataBase();
 
 
-$dataAfterParser = $objectUbuntu->getParserUbuntu($xmlModel);
+$objectUbuntu->pageParsing($xmlModel, $connectDB);
+$objectThreatPost->pageParsing($xmlModel, $connectDB);
