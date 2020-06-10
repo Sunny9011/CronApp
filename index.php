@@ -10,6 +10,7 @@ $objectThreatPost = new ThreatPost();
 $xmlModel = new XmlFeedModel();
 $connectDB = new DataBase();
 
-
-$objectUbuntu->pageParsing($xmlModel, $connectDB);
-$objectThreatPost->pageParsing($xmlModel, $connectDB);
+$sourceLinkUbuntu = 'https://usn.ubuntu.com/usn/rss.xml';
+$sourceLinkThreat = 'https://threatpost.com/category/web-security/feed/';
+$objectUbuntu->parsingPageAndWritingDatabase($xmlModel, $connectDB, $sourceLinkUbuntu);
+$objectThreatPost->parsingPageAndWritingDatabase($xmlModel, $connectDB, $sourceLinkThreat);

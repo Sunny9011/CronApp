@@ -2,5 +2,5 @@
 
 abstract class Parser
 {
-    abstract public function pageParsing(XmlFeedModel $objectXmlFeedModel, DataBase $connect): void;
+    abstract public function parsingPageAndWritingDatabase(XmlFeedModel $objectXmlFeedModel, DataBase $connect, string $link): void;
 }

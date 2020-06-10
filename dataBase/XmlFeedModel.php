@@ -12,28 +12,28 @@ class XmlFeedModel
 
     public function writingParsingPageToDatabase(DataBase $connect): void
     {
-            $this->query = "INSERT INTO xmlfeed (link, title, description, pubDate)
+        $this->query = "INSERT INTO xmlfeed (link, title, description, pubDate)
     VALUES ( '" . $this->link . "', '" . $this->title . "', '" . $this->description . "', '" . $this->pubDate . "')";
         $connect->connect()->exec($this->query);
     }
 
-     public function setLink(string $value): string
+    public function setLink(string $value): string
     {
-        $this->link = $value;
+        return $this->link = $value;
     }
 
     public function setTitle(string $value): string
     {
-        $this->title = $value;
+        return $this->title = $value;
     }
 
     public function setDescription(string $value): string
     {
-        $this->description = $value;
+        return $this->description = $value;
     }
 
     public function setPubDate(string $value): string
     {
-        $this->pubDate = $value;
+        return $this->pubDate = $value;
     }
 }

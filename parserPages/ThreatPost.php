@@ -4,12 +4,10 @@ include_once 'Parser.php';
 
 class ThreatPost extends Parser
 {
-    public $link = 'https://threatpost.com/category/web-security/feed/';
-    public $tags = ['link', 'description', 'title', 'pubDate'];
 
-    public function pageParsing(XmlFeedModel $objectXmlFeedModel, DataBase $connectToDB):void
+    public function parsingPageAndWritingDatabase(XmlFeedModel $objectXmlFeedModel, DataBase $connectToDB, string $link): void
     {
-        $xml = simplexml_load_file($this->link);
+        $xml = simplexml_load_file($link);
         foreach ($xml->xpath('//item') as $item) {
             $objectXmlFeedModel->setLink($item->link->__toString());
             $objectXmlFeedModel->setDescription($item->description->__toString()) ;
