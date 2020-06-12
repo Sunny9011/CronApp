@@ -1,16 +1,13 @@
 <?php
-include_once './parserPages/Ubuntu.php';
-include_once './parserPages/ThreatPost.php';
+include_once './parserPages/PageParser.php';
 include_once './dataBase/XmlFeedModel.php';
 include_once './dataBase/DataBase.php';
 
 
-$objectUbuntu = new Ubuntu();
-$objectThreatPost = new ThreatPost();
+$currentPage = new PageParser();
 $xmlModel = new XmlFeedModel();
 $connectDB = new DataBase();
 
-$sourceLinkUbuntu = 'https://usn.ubuntu.com/usn/rss.xml';
-$sourceLinkThreat = 'https://threatpost.com/category/web-security/feed/';
-$objectUbuntu->parsingPageAndWritingDatabase($xmlModel, $connectDB, $sourceLinkUbuntu);
-$objectThreatPost->parsingPageAndWritingDatabase($xmlModel, $connectDB, $sourceLinkThreat);
+$sourceLink = 'https://usn.ubuntu.com/usn/rss.xml';
+$dataAfterParsingPage = $currentPage->parsingCurrentPage($xmlModel, $sourceLink);
+$xmlModel->writingParsingPageToDatabase($connectDB, $dataAfterParsingPage);

@@ -10,11 +10,13 @@ class XmlFeedModel
     protected $pubDate;
     protected $query;
 
-    public function writingParsingPageToDatabase(DataBase $connect): void
+    public function writingParsingPageToDatabase(DataBase $connect, $dataAfterParsingPage): void
     {
-        $this->query = "INSERT INTO xmlfeed (link, title, description, pubDate)
-    VALUES ( '" . $this->link . "', '" . $this->title . "', '" . $this->description . "', '" . $this->pubDate . "')";
-        $connect->connect()->exec($this->query);
+        foreach ($dataAfterParsingPage as $value) {
+            $this->query = "INSERT INTO xmlfeed (link, title, description, pubDate)
+    VALUES ( '" . $value->link . "', '" . $value->title . "', '" . $value->description . "', '" . $value->pubDate . "')";
+            $connect->connect()->exec($this->query);
+        }
     }
 
     public function setLink(string $value): string
