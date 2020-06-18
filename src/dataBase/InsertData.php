@@ -9,17 +9,23 @@ class InsertData
     {
         $this->query = "INSERT INTO `xmlfeed`(link, title, description, pubDate) VALUES ";
 
-        foreach ($dataAfterParsingPage as $i => $value) {
-            $this->query .= "('{$value->getLink()}', ";
-            $this->query .= "'{$value->getTitle()}', ";
-            $this->query .= "'{$value->getDescription()}', ";
-            $this->query .= "'{$value->getPubDate()}')";
-
-            if ($i + 1 < count($dataAfterParsingPage)) {
-                $this->query .= ", ";
-            }
+        $array1 = [];
+        foreach ($dataAfterParsingPage as $value) {
+            $data = $this->addElementToInsert($value);
+            $array1[] = '(' . implode(', ', $data) . ')';
         }
-
+        $this->query .= implode(', ', $array1);
         $connect->connect()->exec($this->query);
+    }
+
+    public function addElementToInsert(XmlFeedModel $value)
+    {
+        $array   = [];
+        $array[] = '\'' . $value->getLink(). '\'';
+        $array[] = '\'' . $value->getTitle(). '\'';
+        $array[] = '\'' . $value->getDescription(). '\'';
+        $array[] = '\'' . $value->getPubDate(). '\'';
+
+        return $array;
     }
 }
