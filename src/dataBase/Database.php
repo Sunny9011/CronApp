@@ -1,6 +1,6 @@
 <?php
 
-class DataBase
+class Database
 {
     private static $_instance;
     private $conn;
@@ -18,7 +18,7 @@ class DataBase
 
     /**
      * DB class instance
-     * @return DataBase
+     * @return Database
      */
     public static function getInstance()
     {

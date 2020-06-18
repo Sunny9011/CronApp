@@ -1,13 +1,15 @@
 <?php
-include_once './parserPages/PageParser.php';
-include_once './dataBase/XmlFeedModel.php';
-include_once './dataBase/DataBase.php';
+include_once './src/parserPages/PageParser.php';
+include_once './src/dataBase/XmlFeedModel.php';
+include_once './src/dataBase/Database.php';
+include_once './src/dataBase/InsertData.php';
 
 
 $currentPage = new PageParser();
 $xmlModel = new XmlFeedModel();
-$connectDB = new DataBase();
+$connectDB = new Database();
+$insertData = new InsertData();
 
 $sourceLink = 'https://usn.ubuntu.com/usn/rss.xml';
-$dataAfterParsingPage = $currentPage->parsingCurrentPage($xmlModel, $sourceLink);
-$xmlModel->writingParsingPageToDatabase($connectDB, $dataAfterParsingPage);
+$dataAfterParsingPage = $currentPage->getValuesInItem($xmlModel, $sourceLink);
+$insertData->multiInsertInDatabase($connectDB, $dataAfterParsingPage);

@@ -4,7 +4,7 @@ include_once 'Parser.php';
 
 class PageParser extends Parser
 {
-    public function parsingCurrentPage(XmlFeedModel $objectXmlModel, string $link): array
+    public function getValuesInItem(XmlFeedModel $objectXmlModel, string $link): array
     {
         $collection = [];
         $xml = simplexml_load_file($link);
@@ -16,6 +16,7 @@ class PageParser extends Parser
 
             $collection [] = $objectXmlModel;
         }
+
         return $collection;
     }
 }
