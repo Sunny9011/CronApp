@@ -12,4 +12,4 @@ $insertData = new InsertData();
 
 $sourceLink = 'https://usn.ubuntu.com/usn/rss.xml';
 $dataAfterParsingPage = $currentPage->getValuesInItem($sourceLink);
-$insertData->multiInsertInDatabase($connectDB, $dataAfterParsingPage);
+$insertData->multiInsertIntoDatabase($connectDB, $dataAfterParsingPage);
