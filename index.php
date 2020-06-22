@@ -1,10 +1,15 @@
 <?php
-include_once 'Ubuntu.php';
-include_once 'XmlFeedModel.php';
+include_once './src/parserPages/PageParser.php';
+include_once './src/dataBase/XmlFeedModel.php';
+include_once './src/dataBase/Database.php';
+include_once './src/dataBase/InsertData.php';
 
 
-$objectUbuntu = new Ubuntu();
+$currentPage = new PageParser();
 $xmlModel = new XmlFeedModel();
+$connectDB = new Database();
+$insertData = new InsertData();
 
-
-$dataAfterParser = $objectUbuntu->getParserUbuntu($xmlModel);
+$sourceLink = 'https://usn.ubuntu.com/usn/rss.xml';
+$dataAfterParsingPage = $currentPage->getValuesInItem($sourceLink);
+$insertData->multiInsertIntoDatabase($connectDB, $dataAfterParsingPage);
