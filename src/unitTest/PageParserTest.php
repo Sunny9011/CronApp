@@ -11,6 +11,7 @@ class PageParserTest extends TestCase
     {
         $objectPage = new PageParser();
         $sourceLink = 'https://usn.ubuntu.com/usn/rss.xml';
+        $this->assertNotEmpty($sourceLink, 'This link empty!');
         $haystack = $objectPage->getValuesInItem($sourceLink);
         $this->assertIsArray($haystack);
         $expected = $haystack[0];

@@ -11,17 +11,20 @@ class InsertDataTest extends TestCase
     {
         $objectInsert = new InsertData();
         $objectXmlFeed = new XmlFeedModel();
-        $actualResult = $objectInsert->addElementToInsert($objectXmlFeed);
         $objectXmlFeed->setTitle(5);
         $objectXmlFeed->setPubDate(10);
         $objectXmlFeed->setLink(8);
         $objectXmlFeed->setDescription(20);
-        $fakeObjectXml = $objectInsert->addElementToInsert($objectXmlFeed);
-        $needle = ['', '', '', '', '', '', '', '', '', ''];
-        $invalidValues = [3,5,7,10,30];
-        $fakeData = [5,10,8,20];
-        $this->assertEquals($needle, $actualResult);
-        $this->assertNotEquals($invalidValues, $actualResult);
-        $this->assertNotEquals($fakeData, $fakeObjectXml);
+        $fakeNumbersForFunction = $objectInsert->addElementToInsert($objectXmlFeed);
+        $fakeNumbers = [5,10,8,20];
+        $this->assertNotEquals($fakeNumbers, $fakeNumbersForFunction,'array must have strings not numbers');
+        $objectXmlFeed->setTitle('Title');
+        $objectXmlFeed->setPubDate('date');
+        $objectXmlFeed->setLink('https://usn.ubuntu.com/usn/rss.xml');
+        $objectXmlFeed->setDescription('Some description');
+        $this->assertNotEmpty($objectXmlFeed->getTitle(),'Property is empty');
+        $fakeStringsForFunction = $objectInsert->addElementToInsert($objectXmlFeed);
+        $fakeStrings = ['https://usn.ubuntu.com/usn/rss.xml', 'Title', 'Some description', 'date'];
+        $this->assertEquals($fakeStrings, $fakeStringsForFunction, 'Data not equals expected');
     }
 }
