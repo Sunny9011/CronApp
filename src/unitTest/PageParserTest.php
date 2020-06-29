@@ -10,12 +10,12 @@ class PageParserTest extends TestCase
     public function testPageParser()
     {
         $objectPage = new PageParser();
+
         $sourceLink = 'https://usn.ubuntu.com/usn/rss.xml';
-        $this->assertNotEmpty($sourceLink, 'This link empty!');
-        $haystack = $objectPage->getValuesInItem($sourceLink);
+        $haystack   = $objectPage->getValuesInItem($sourceLink);
         $this->assertIsArray($haystack);
-        $expected = $haystack[0];
-        $this->assertInstanceOf('XmlFeedModel', $expected,
+        $actual     = $haystack[0];
+        $this->assertInstanceOf('XmlFeedModel', $actual,
             $message = 'Failed asserting is not an instance of class');
     }
 }
