@@ -16,7 +16,7 @@ class PageParserTest extends TestCase
         $this->objectPage = new PageParser();
     }
 
-    public function testPageParser()
+    public function testPageParser(): void
     {
         $sourceLink = 'https://usn.ubuntu.com/usn/rss.xml';
         $haystack = $this->objectPage->getValuesInItem($sourceLink);
@@ -25,7 +25,7 @@ class PageParserTest extends TestCase
         $this->assertInstanceOf('XmlFeedModel', $actual, 'Failed asserting is not an instance of class');
     }
 
-    public function testXmlFile()
+    public function testXmlFile(): void
     {
         $wrongLink = 'https://usn.ubuntu.com';
         $response = $this->objectPage->getValuesInItem($wrongLink);

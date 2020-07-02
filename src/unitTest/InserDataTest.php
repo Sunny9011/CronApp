@@ -17,7 +17,7 @@ class InsertDataTest extends TestCase
         $this->objectXmlFeed = new XmlFeedModel();
     }
 
-    public function testAddElementToInsert()
+    public function testAddElementToInsert(): void
     {
         $this->objectXmlFeed->setTitle(5);
         $this->objectXmlFeed->setPubDate(10);
@@ -27,7 +27,7 @@ class InsertDataTest extends TestCase
         $fakeNumbers = [5,10,8,20];
         $this->assertNotEquals($fakeNumbers, $actualNumbers,'array must have strings not numbers');
     }
-    public function testPropertyObject()
+    public function testPropertyObject(): void
     {
         $this->objectXmlFeed->setTitle('Title');
         $this->objectXmlFeed->setPubDate('date');
