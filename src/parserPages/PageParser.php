@@ -4,14 +4,14 @@ include_once 'Parser.php';
 
 class PageParser extends Parser
 {
+    /**
+     * @return array
+     */
     public function getValuesInItem(string $link): ?array
     {
         $collection = [];
         @$xml = simplexml_load_file($link);
-        $errorMassage = 'This link cannot be parsing';
-        if ($xml === false) {
-            return $errorMassage;
-        } else {
+        if ($xml) {
             foreach ($xml->xpath('//item') as $item) {
                 $objectXmlModel = new XmlFeedModel();
                 $objectXmlModel->setLink($item->link->__toString());
@@ -22,5 +22,6 @@ class PageParser extends Parser
             }
             return $collection;
         }
+        return null;
     }
 }
