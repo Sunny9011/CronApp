@@ -22,9 +22,9 @@ class MultiInsertIntoDatabaseTest extends TestCase
 
     public function testMultiInsertIntoDatabase(): void
     {
-        $getRowBD   = 'SELECT link FROM xmlfeed';
+        $getRowBD   = 'SELECT title FROM xmlfeed';
         $collection = [];
-        $this->xmlFeedObject->setTitle('Title');
+        $this->xmlFeedObject->setTitle('title');
         $this->xmlFeedObject->setPubDate('date');
         $this->xmlFeedObject->setLink('https://usn.ubuntu.com/usn/rss.xml');
         $this->xmlFeedObject->setDescription('Some description');
@@ -36,6 +36,6 @@ class MultiInsertIntoDatabaseTest extends TestCase
 
         $this->insertData->multiInsertIntoDatabase($this->connectDB, $collection);
         $expected = $this->connectDB->connect()->exec($getRowBD);
-        $this->assertEquals($expected, 'https://usn.ubuntu.com/usn/rss.xml');
+        $this->assertEquals($expected, 'title');
     }
 }
