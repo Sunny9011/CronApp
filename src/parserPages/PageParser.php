@@ -4,7 +4,7 @@ include_once 'Parser.php';
 
 class PageParser extends Parser
 {
-    public function getValuesInItem(string $link)
+    public function getValuesInItem(string $link): ?array
     {
         $collection = [];
         @$xml = simplexml_load_file($link);

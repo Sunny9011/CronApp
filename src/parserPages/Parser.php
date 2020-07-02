@@ -2,5 +2,5 @@
 
 abstract class Parser
 {
-    abstract public function getValuesInItem(string $link);
+    abstract public function getValuesInItem(string $link): ?array ;
 }
