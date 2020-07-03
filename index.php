@@ -11,5 +11,5 @@ $connectDB = new Database();
 $insertData = new InsertData();
 
 $sourceLink = 'https://usn.ubuntu.com/usn/rss.xml';
-$dataAfterParsingPage = $currentPage->getValuesInItem($sourceLink);
-$insertData->multiInsertIntoDatabase($connectDB, $dataAfterParsingPage);
+$collectionObjects = $currentPage->getValuesInItem($sourceLink);
+$insertData->multiInsert($connectDB, $collectionObjects);

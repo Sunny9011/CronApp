@@ -5,28 +5,27 @@ class InsertData
 {
     protected $query;
 
-    public function multiInsertIntoDatabase(Database $connect, array $dataAfterParsingPage): void
+    /**
+     * @return void
+     */
+    public function multiInsert(Database $connect, array $collectionObjects): void
     {
         $this->query = "INSERT INTO `xmlfeed`(link, title, description, pubDate) VALUES ";
 
         $preparedRowsForInsertion = [];
-        foreach ($dataAfterParsingPage as $value) {
-            $gettingProperties = $this->addElementToInsert($value);
-            $preparedRowsForInsertion[] = '(' . implode(', ', $gettingProperties) . ')';
+        foreach ($collectionObjects as $value) {
+            if ($value === XmlFeedModel::class) {
+                $preparedRowsForInsertion[] = '(' . '\'' . $value->getLink() . '\'' . ', ' .
+                    '\'' . $value->getTitle() . '\'' . ', ' .
+                    '\'' . $value->getDescrition() . '\'' . ', ' .
+                    '\'' . $value->getPubDate() . '\'' . ', '
+                    . ')';
+            } else {
+                echo 'Invalid value or object!';
+            }
         }
 
         $this->query .= implode(', ', $preparedRowsForInsertion);
         $connect->connect()->exec($this->query);
-    }
-
-    public function addElementToInsert(XmlFeedModel $objectParsedPage): array
-    {
-        $propertiesObjectXml = [];
-        $propertiesObjectXml[] = '\'' . $objectParsedPage->getLink() . '\'';
-        $propertiesObjectXml[] = '\'' . $objectParsedPage->getTitle() . '\'';
-        $propertiesObjectXml[] = '\'' . $objectParsedPage->getDescription() . '\'';
-        $propertiesObjectXml[] = '\'' . $objectParsedPage->getPubDate() . '\'';
-
-        return $propertiesObjectXml;
     }
 }
